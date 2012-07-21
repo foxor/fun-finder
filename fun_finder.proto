@@ -1,0 +1,47 @@
+package fun_finder;
+
+option java_package = "com.fun_finder";
+option java_outer_classname = "FunFinderProtos";
+
+message FunExperimentClient {
+  required int32 index = 1;
+  required int32 funProperty = 2;
+}
+
+message FunGuessClient {
+  repeated int32 baseline = 1;
+  repeated FunExperimentClient changes = 2;
+}
+
+message FunExperimentServer {
+  required int32 index = 1;
+  required int32 property = 2;
+  required int32 deviation = 3;
+}
+
+message FunGuessServer {
+  repeated int32 baseline = 1;
+  repeated FunExperimentServer changes = 2;
+}
+
+message FunMessage {
+  required string gameId = 1;
+  required FunGuessClient config = 2;
+  repeated int32 funScore = 3;
+}
+
+message GameRatings {
+  required string gameId = 1;
+  required FunGuessClient config = 2;
+  repeated int32 funScores = 3;
+}
+
+message FunTrainingExercise {
+  repeated FunMessage allGames = 1;
+  repeated FunGuessServer hypothesis = 2;
+}
+
+message GameInitMessage {
+  required FunGuessClient initialConfig = 1;
+  required string gameId = 2;
+}
